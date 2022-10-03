@@ -7,8 +7,11 @@ import '../common/get_it.dart';
 class Injection {
   Future<void> initialize() async {
     await _registerCore();
+    _registerData();
     _registerDomain();
   }
+
+  void _registerData() {}
 
   void _registerDomain() {}
 
