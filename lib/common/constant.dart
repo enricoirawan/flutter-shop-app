@@ -9,6 +9,7 @@ class CachedKey {
 
   String get onBoardingKey => 'onBoardingKey';
   String get tokenKey => 'tokenKey';
+  String get userId => 'userId';
 }
 
 class AppApi {

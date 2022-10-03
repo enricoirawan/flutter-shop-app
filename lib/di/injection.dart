@@ -18,9 +18,11 @@ class Injection {
   Future<void> _registerCore() async {
     final sharedPreferences = await SharedPreferences.getInstance();
     sl.registerLazySingleton(() => sharedPreferences);
+    sl.registerLazySingleton<DioHandler>(
+      () => DioHandler(
+        apiBaseUrl: '',
+      ),
+    );
     sl.registerLazySingleton<Dio>(() => sl<DioHandler>().dio);
-    sl.registerLazySingleton<DioHandler>(() => DioHandler(
-          apiBaseUrl: '',
-        ));
   }
 }
