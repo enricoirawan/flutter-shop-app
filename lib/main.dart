@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_shop_app/common/get_it.dart';
+import 'package:flutter_shop_app/common/navigation/navigation_helper.dart';
 import 'package:flutter_shop_app/common/styles.dart';
+import 'package:flutter_shop_app/presentation/bloc/signin_bloc/signin_cubit.dart';
+import 'package:flutter_shop_app/presentation/bloc/splash_bloc/splash_cubit.dart';
+import 'package:flutter_shop_app/presentation/ui/home_screen.dart';
+import 'package:flutter_shop_app/presentation/ui/onboard_screen.dart';
+import 'package:flutter_shop_app/presentation/ui/signin_screen.dart';
+import 'package:flutter_shop_app/presentation/ui/splash_screen.dart';
 
+import 'common/navigation/router/app_routes.dart';
 import 'di/injection.dart';
 
 void main() async {
@@ -29,11 +39,54 @@ class MyApp extends StatelessWidget {
                   primary: primaryColor,
                   onPrimary: Colors.black,
                   secondary: secondaryColor,
-                  background: secondaryColor,
+                  background: Colors.white,
                 ),
             textTheme: myTextTheme,
           ),
-          home: const MyHomePage(title: 'Flutter Demo Home Page'),
+          navigatorKey: NavigationHelperImpl.navigatorKey,
+          home: BlocProvider(
+            create: (_) => SplashCubit(
+              getTokenCase: sl(),
+            )..initSplashScreen(),
+            child: const SplashScreen(),
+          ),
+          onGenerateRoute: (RouteSettings settings) {
+            final argument = settings.arguments;
+            switch (settings.name) {
+              case AppRoutes.splash:
+                return MaterialPageRoute(
+                  builder: (_) {
+                    return const SplashScreen();
+                  },
+                );
+              case AppRoutes.onboarding:
+                return MaterialPageRoute(
+                  builder: (_) {
+                    return const OnBoardScreen();
+                  },
+                );
+              case AppRoutes.signIn:
+                return MaterialPageRoute(
+                  builder: (_) {
+                    return BlocProvider(
+                      create: (_) => SignInCubit(
+                        cacheTokenUseCase: sl(),
+                        cacheUserIdUseCase: sl(),
+                        signInUseCase: sl(),
+                      ),
+                      child: const SignInScreen(),
+                    );
+                  },
+                );
+              case AppRoutes.home:
+                return MaterialPageRoute(
+                  builder: (_) {
+                    return const HomeScreen();
+                  },
+                );
+            }
+            return null;
+          },
         );
       },
     );
