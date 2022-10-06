@@ -41,5 +41,5 @@ class ErrorMessage {
 
   String get loginWithGoogle => 'login with google feature not ready yet';
 
-  String get loginWithFacebook => 'login with faoogle feature not ready yet';
+  String get loginWithFacebook => 'login with facebook feature not ready yet';
 }
