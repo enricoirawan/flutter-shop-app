@@ -36,4 +36,10 @@ class ErrorMessage {
   String get failedGetToken => 'failed get token';
 
   String get failedGetUserId => 'failed get user id';
+
+  String get signUpFeature => 'sign up feature not ready yet';
+
+  String get loginWithGoogle => 'login with google feature not ready yet';
+
+  String get loginWithFacebook => 'login with faoogle feature not ready yet';
 }

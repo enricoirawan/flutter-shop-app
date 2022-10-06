@@ -1,5 +1,7 @@
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_shop_app/common/constant.dart';
 import 'package:flutter_shop_app/common/styles.dart';
 import 'package:flutter_shop_app/presentation/widget/logo.dart';
 
@@ -66,7 +68,12 @@ class OnBoardScreen extends StatelessWidget {
                     Expanded(
                       child: MaterialButton(
                         height: 45.h,
-                        onPressed: () {},
+                        onPressed: () {
+                          AnimatedSnackBar.material(
+                            AppConstants.errorMessage.signUpFeature,
+                            type: AnimatedSnackBarType.warning,
+                          ).show(context);
+                        },
                         color: primaryColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),

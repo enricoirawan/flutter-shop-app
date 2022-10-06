@@ -8,6 +8,7 @@ import 'package:flutter_shop_app/domain/entity/request/authentication_request_en
 import 'package:flutter_shop_app/presentation/bloc/signin_bloc/signin_cubit.dart';
 import 'package:flutter_shop_app/presentation/widget/logo.dart';
 
+import '../../common/constant.dart';
 import '../../common/get_it.dart';
 import '../../common/navigation/router/auth_route.dart';
 
@@ -236,7 +237,12 @@ class _SignInScreenState extends State<SignInScreen> {
                       Expanded(
                         child: MaterialButton(
                           height: 40.h,
-                          onPressed: () {},
+                          onPressed: () {
+                            AnimatedSnackBar.material(
+                              AppConstants.errorMessage.loginWithFacebook,
+                              type: AnimatedSnackBarType.warning,
+                            ).show(context);
+                          },
                           color: secondaryColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(6),
@@ -271,7 +277,12 @@ class _SignInScreenState extends State<SignInScreen> {
                       Expanded(
                         child: MaterialButton(
                           height: 40.h,
-                          onPressed: () {},
+                          onPressed: () {
+                            AnimatedSnackBar.material(
+                              AppConstants.errorMessage.loginWithGoogle,
+                              type: AnimatedSnackBarType.warning,
+                            ).show(context);
+                          },
                           color: whiteColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(6),
