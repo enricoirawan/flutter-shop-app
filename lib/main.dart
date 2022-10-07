@@ -6,13 +6,14 @@ import 'package:flutter_shop_app/common/navigation/navigation_helper.dart';
 import 'package:flutter_shop_app/common/styles.dart';
 import 'package:flutter_shop_app/presentation/bloc/signin_bloc/signin_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/splash_bloc/splash_cubit.dart';
-import 'package:flutter_shop_app/presentation/ui/home_screen.dart';
+import 'package:flutter_shop_app/presentation/ui/main_screen.dart';
 import 'package:flutter_shop_app/presentation/ui/onboard_screen.dart';
 import 'package:flutter_shop_app/presentation/ui/signin_screen.dart';
 import 'package:flutter_shop_app/presentation/ui/splash_screen.dart';
 
 import 'common/navigation/router/app_routes.dart';
 import 'di/injection.dart';
+import 'presentation/bloc/bottom_nav_bloc/bottom_nav_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -78,10 +79,13 @@ class MyApp extends StatelessWidget {
                     );
                   },
                 );
-              case AppRoutes.home:
+              case AppRoutes.main:
                 return MaterialPageRoute(
                   builder: (_) {
-                    return const HomeScreen();
+                    return BlocProvider(
+                      create: (context) => BottomNavCubit(),
+                      child: const MainScreen(),
+                    );
                   },
                 );
             }
@@ -89,52 +93,6 @@ class MyApp extends StatelessWidget {
           },
         );
       },
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
