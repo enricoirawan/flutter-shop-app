@@ -46,19 +46,22 @@ class ProductWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            OctoImage(
-              image: CachedNetworkImageProvider(
-                product.image,
+            Hero(
+              tag: product.id,
+              child: OctoImage(
+                image: CachedNetworkImageProvider(
+                  product.image,
+                ),
+                placeholderBuilder: OctoPlaceholder.blurHash(
+                  'LEHV6nWB2yk8pyo0adR*.7kCMdnj',
+                ),
+                errorBuilder: OctoError.icon(
+                  color: Colors.red,
+                ),
+                fit: BoxFit.contain,
+                width: double.infinity,
+                height: 150.h,
               ),
-              placeholderBuilder: OctoPlaceholder.blurHash(
-                'LEHV6nWB2yk8pyo0adR*.7kCMdnj',
-              ),
-              errorBuilder: OctoError.icon(
-                color: Colors.red,
-              ),
-              fit: BoxFit.contain,
-              width: double.infinity,
-              height: 150.h,
             ),
             SizedBox(
               height: 10.h,

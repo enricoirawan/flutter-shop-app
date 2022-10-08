@@ -15,26 +15,29 @@ class LogoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          "e",
-          style: Theme.of(context).textTheme.headline3!.copyWith(
-                fontWeight: isFontbold ? FontWeight.bold : FontWeight.normal,
-                color: primaryColor,
-                fontSize: fontSize,
-              ),
-        ),
-        Text(
-          "Shop",
-          style: Theme.of(context).textTheme.headline3!.copyWith(
-                fontWeight: isFontbold ? FontWeight.bold : FontWeight.normal,
-                color: color,
-                fontSize: fontSize,
-              ),
-        ),
-      ],
+    return Hero(
+      tag: "logo",
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "e",
+            style: Theme.of(context).textTheme.headline3!.copyWith(
+                  fontWeight: isFontbold ? FontWeight.bold : FontWeight.normal,
+                  color: primaryColor,
+                  fontSize: fontSize,
+                ),
+          ),
+          Text(
+            "Shop",
+            style: Theme.of(context).textTheme.headline3!.copyWith(
+                  fontWeight: isFontbold ? FontWeight.bold : FontWeight.normal,
+                  color: color,
+                  fontSize: fontSize,
+                ),
+          ),
+        ],
+      ),
     );
   }
 }
