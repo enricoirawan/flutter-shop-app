@@ -34,6 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       categoryActiveIndex = index;
     });
+
+    context.read<ProductCubit>().getAllProducts(selectedCategory);
   }
 
   @override

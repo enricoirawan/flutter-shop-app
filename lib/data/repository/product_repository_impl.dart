@@ -21,9 +21,10 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
-  Future<Either<Failure, List<ProductEntity>>> getAllProducts() async {
+  Future<Either<Failure, List<ProductEntity>>> getAllProducts(
+      String category) async {
     try {
-      final response = await productRemoteDataSources.getAllProducts();
+      final response = await productRemoteDataSources.getAllProducts(category);
 
       List<ProductEntity> products = [];
 

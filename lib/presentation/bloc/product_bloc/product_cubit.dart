@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_shop_app/core/state/view_state.dart';
-import 'package:flutter_shop_app/core/use_case/use_case.dart';
 import 'package:flutter_shop_app/domain/entity/response/product_entity.dart';
 import 'package:flutter_shop_app/domain/usecase/get_all_products_usecase.dart';
 
@@ -18,11 +17,11 @@ class ProductCubit extends Cubit<ProductState> {
           ),
         );
 
-  void getAllProducts() async {
+  void getAllProducts(String category) async {
     emit(
       ProductState(productState: ViewData.loading()),
     );
-    final response = await getAllProductsUseCase.call(const NoParams());
+    final response = await getAllProductsUseCase.call(category);
 
     response.fold(
       (error) {

@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               create: (_) => ProductCubit(
                 getAllProductsUseCase: sl(),
-              )..getAllProducts(),
+              )..getAllProducts("All"),
             ),
           ],
           child: MaterialApp(

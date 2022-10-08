@@ -5,7 +5,7 @@ import '../../../common/constant.dart';
 
 abstract class ProductRemoteDataSources {
   Future<List<dynamic>> getAllCategories();
-  Future<List<ProductResponseDto>> getAllProducts();
+  Future<List<ProductResponseDto>> getAllProducts(String category);
 }
 
 class ProductRemoteDataSourcesImpl implements ProductRemoteDataSources {
@@ -29,10 +29,10 @@ class ProductRemoteDataSourcesImpl implements ProductRemoteDataSources {
   }
 
   @override
-  Future<List<ProductResponseDto>> getAllProducts() async {
+  Future<List<ProductResponseDto>> getAllProducts(String category) async {
     try {
       final response = await dio.get(
-        "${AppConstants.appApi.baseUrl}${AppConstants.appApi.products}",
+        "${AppConstants.appApi.baseUrl}${AppConstants.appApi.products}${category == "All" ? "" : "category/$category"}",
       );
 
       List<ProductResponseDto> products = [];
