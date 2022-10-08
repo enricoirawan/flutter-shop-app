@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_shop_app/common/get_it.dart';
+import 'package:flutter_shop_app/common/navigation/argument/detail_product_argument.dart';
 import 'package:flutter_shop_app/common/navigation/navigation_helper.dart';
 import 'package:flutter_shop_app/common/styles.dart';
+import 'package:flutter_shop_app/domain/entity/response/product_entity.dart';
 import 'package:flutter_shop_app/presentation/bloc/address_bloc/address_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/product_bloc/product_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/product_category/product_category_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/signin_bloc/signin_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/splash_bloc/splash_cubit.dart';
+import 'package:flutter_shop_app/presentation/ui/detail_product_screen.dart';
 import 'package:flutter_shop_app/presentation/ui/get_user_position.dart';
 import 'package:flutter_shop_app/presentation/ui/main_screen.dart';
 import 'package:flutter_shop_app/presentation/ui/onboard_screen.dart';
@@ -119,6 +122,14 @@ class MyApp extends StatelessWidget {
                   return MaterialPageRoute(
                     builder: (_) {
                       return const MainScreen();
+                    },
+                  );
+                case AppRoutes.detailProduct:
+                  return MaterialPageRoute(
+                    builder: (_) {
+                      return DetailProductScreen(
+                        argument: argument as DetailProductArgument,
+                      );
                     },
                   );
               }

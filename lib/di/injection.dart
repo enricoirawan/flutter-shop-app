@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_shop_app/common/navigation/router/home_route.dart';
 import 'package:flutter_shop_app/data/datasource/local/address_local_sources.dart';
 import 'package:flutter_shop_app/data/datasource/remote/address_remote_datasouces.dart';
 import 'package:flutter_shop_app/data/datasource/remote/product_remote_datasources.dart';
@@ -160,6 +161,12 @@ class Injection {
 
     sl.registerLazySingleton<AuthRouter>(
       () => AuthRouterImpl(
+        navigationHelper: sl(),
+      ),
+    );
+
+    sl.registerLazySingleton<HomeRouter>(
+      () => HomeRouterImpl(
         navigationHelper: sl(),
       ),
     );

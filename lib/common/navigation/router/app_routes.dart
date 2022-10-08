@@ -5,4 +5,5 @@ class AppRoutes {
   static const String getUserAddress = "/getUserAddress";
   static const String main = "/main";
   static const String home = "/home";
+  static const String detailProduct = "/detailProduct";
 }
