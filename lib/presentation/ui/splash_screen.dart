@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_shop_app/common/constant.dart';
 import 'package:flutter_shop_app/common/styles.dart';
 import 'package:flutter_shop_app/core/state/view_state.dart';
 import 'package:flutter_shop_app/presentation/bloc/splash_bloc/splash_cubit.dart';
@@ -21,7 +22,13 @@ class SplashScreen extends StatelessWidget {
         final status = state.splashState.status;
 
         if (status.isHasData) {
-          authRouter.navigateToHome();
+          if (state.splashState.data ==
+              AppConstants.cachedKey.cacheGetUserAddressKey) {
+            authRouter.navigateToHome();
+          } else if (state.splashState.data ==
+              AppConstants.cachedKey.tokenKey) {
+            authRouter.navigateToGetUserPosition();
+          }
         } else if (status.isNoData) {
           authRouter.navigateToOnboard();
         }

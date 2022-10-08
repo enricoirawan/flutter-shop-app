@@ -26,7 +26,7 @@ final TextTheme myTextTheme = TextTheme(
     fontWeight: FontWeight.w400,
   ),
   headline5: GoogleFonts.inter(
-    fontSize: 23,
+    fontSize: 23.sp,
     fontWeight: FontWeight.w400,
   ),
   headline6: GoogleFonts.inter(

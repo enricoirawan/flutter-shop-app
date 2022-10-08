@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_shop_app/data/datasource/local/authentication_local_datasources.dart';
-import 'package:flutter_shop_app/data/datasource/remote/authentication_in_remote_datasources.dart';
+import 'package:flutter_shop_app/data/datasource/remote/authentication_remote_datasources.dart';
 import 'package:flutter_shop_app/domain/entity/request/authentication_request_entity.dart';
 import 'package:flutter_shop_app/domain/entity/response/authentication_response_entity.dart';
 import 'package:flutter_shop_app/common/failure.dart';

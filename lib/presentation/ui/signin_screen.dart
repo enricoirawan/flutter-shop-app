@@ -37,7 +37,12 @@ class _SignInScreenState extends State<SignInScreen> {
             type: AnimatedSnackBarType.error,
           ).show(context);
         } else if (status.isHasData) {
-          _authRouter.navigateToHome();
+          if (state.signIn.data ==
+              AppConstants.cachedKey.cacheGetUserAddressKey) {
+            _authRouter.navigateToHome();
+          } else {
+            _authRouter.navigateToGetUserPosition();
+          }
         }
       },
       builder: (context, state) {

@@ -4,6 +4,7 @@ class AppConstants {
   static CachedKey cachedKey = const CachedKey();
   static AppApi appApi = const AppApi();
   static ErrorMessage errorMessage = const ErrorMessage();
+  static SuccessMessage successMessage = const SuccessMessage();
 }
 
 class CachedKey {
@@ -12,6 +13,8 @@ class CachedKey {
   String get onBoardingKey => 'onBoardingKey';
   String get tokenKey => 'tokenKey';
   String get userId => 'userId';
+  String get cacheGetUserAddressKey => "cacheGetUserAddressKey";
+  String get addressKey => 'addressKey';
 }
 
 class AppApi {
@@ -20,6 +23,10 @@ class AppApi {
   String get baseUrl => 'https://fakestoreapi.com/';
 
   String get signIn => 'auth/login';
+
+  String get categories => 'products/categories';
+
+  String get products => 'products/';
 }
 
 class ErrorMessage {
@@ -35,6 +42,10 @@ class ErrorMessage {
 
   String get failedGetToken => 'failed get token';
 
+  String get failedGetAddress => 'failed get address';
+
+  String get failedGetUserAddressStatus => 'failed get user address status';
+
   String get failedGetUserId => 'failed get user id';
 
   String get signUpFeature => 'sign up feature not ready yet';
@@ -42,4 +53,10 @@ class ErrorMessage {
   String get loginWithGoogle => 'login with google feature not ready yet';
 
   String get loginWithFacebook => 'login with facebook feature not ready yet';
+}
+
+class SuccessMessage {
+  const SuccessMessage();
+
+  String get saveAddressSuccess => "Address have set successfully";
 }

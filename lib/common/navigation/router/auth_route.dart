@@ -4,9 +4,13 @@ import 'package:flutter_shop_app/common/navigation/router/app_routes.dart';
 abstract class AuthRouter {
   void goBack({String? arguments});
 
+  void navigateToSplash();
+
   void navigateToOnboard();
 
   void navigateToSignIn();
+
+  void navigateToGetUserPosition();
 
   void navigateToHome();
 }
@@ -22,6 +26,11 @@ class AuthRouterImpl implements AuthRouter {
   }
 
   @override
+  void navigateToSplash() {
+    navigationHelper.pushNamedAndRemoveUntil(AppRoutes.splash);
+  }
+
+  @override
   void navigateToOnboard() {
     navigationHelper.pushReplacementNamed(AppRoutes.onboarding);
   }
@@ -29,6 +38,11 @@ class AuthRouterImpl implements AuthRouter {
   @override
   void navigateToHome() {
     navigationHelper.pushReplacementNamed(AppRoutes.main);
+  }
+
+  @override
+  void navigateToGetUserPosition() {
+    navigationHelper.pushReplacementNamed(AppRoutes.getUserAddress);
   }
 
   @override
