@@ -11,6 +11,7 @@ import 'package:flutter_shop_app/presentation/widget/category.dart';
 import 'package:flutter_shop_app/presentation/widget/category_shimmer.dart';
 import 'package:flutter_shop_app/presentation/widget/logo.dart';
 import 'package:flutter_shop_app/presentation/widget/product.dart';
+import 'package:flutter_shop_app/presentation/widget/product_shimmer.dart';
 import 'package:flutter_shop_app/presentation/widget/search.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -51,7 +52,11 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               // Start: Logo
-              LogoWidget(fontSize: 35.sp, color: blackColor, isFontbold: true),
+              LogoWidget(
+                fontSize: 35.sp,
+                color: secondaryColor,
+                isFontbold: true,
+              ),
               // End: Logo
 
               // Start: Search Widget
@@ -91,6 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   .bodyText2!
                                   .copyWith(
                                     fontWeight: FontWeight.bold,
+                                    color: secondaryColor,
                                   ),
                               overflow: TextOverflow.ellipsis,
                               maxLines: 1,
@@ -153,7 +159,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   final products = state.productState.data ?? [];
 
                   if (status.isLoading) {
-                    return const CircularProgressIndicator();
+                    return SizedBox(
+                      height: MediaQuery.of(context).size.height / 1.85,
+                      child: GridView.count(
+                        crossAxisCount: 2,
+                        childAspectRatio: (itemWidth / itemHeight),
+                        children: const [
+                          ProductWidgetShimmer(),
+                          ProductWidgetShimmer(),
+                          ProductWidgetShimmer(),
+                          ProductWidgetShimmer(),
+                          ProductWidgetShimmer(),
+                          ProductWidgetShimmer(),
+                          ProductWidgetShimmer(),
+                          ProductWidgetShimmer(),
+                        ],
+                      ),
+                    );
                   } else if (status.isHasData) {
                     return SizedBox(
                       height: MediaQuery.of(context).size.height / 1.85,

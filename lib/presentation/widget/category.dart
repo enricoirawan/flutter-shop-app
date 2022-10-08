@@ -30,7 +30,7 @@ class CategoryWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
           border: Border.all(
-            color: isActive ? whiteColor : blackColor,
+            color: isActive ? whiteColor : secondaryColor,
           ),
           borderRadius: BorderRadius.circular(6),
           color: isActive ? primaryColor : whiteColor,
