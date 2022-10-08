@@ -27,6 +27,8 @@ class AppApi {
   String get categories => 'products/categories';
 
   String get products => 'products/';
+
+  String get profile => 'users/';
 }
 
 class ErrorMessage {

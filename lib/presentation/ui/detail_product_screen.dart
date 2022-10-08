@@ -51,7 +51,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                             ),
                       ),
                       Text(
-                        "\$400",
+                        "\$${product.price}",
                         style: Theme.of(context).textTheme.bodyText1!.copyWith(
                               color: whiteColor,
                             ),

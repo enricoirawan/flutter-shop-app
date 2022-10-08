@@ -5,10 +5,10 @@ import 'package:flutter_shop_app/common/get_it.dart';
 import 'package:flutter_shop_app/common/navigation/argument/detail_product_argument.dart';
 import 'package:flutter_shop_app/common/navigation/navigation_helper.dart';
 import 'package:flutter_shop_app/common/styles.dart';
-import 'package:flutter_shop_app/domain/entity/response/product_entity.dart';
 import 'package:flutter_shop_app/presentation/bloc/address_bloc/address_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/product_bloc/product_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/product_category/product_category_cubit.dart';
+import 'package:flutter_shop_app/presentation/bloc/profile_bloc/profile_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/signin_bloc/signin_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/splash_bloc/splash_cubit.dart';
 import 'package:flutter_shop_app/presentation/ui/detail_product_screen.dart';
@@ -75,6 +75,12 @@ class MyApp extends StatelessWidget {
               create: (_) => ProductCubit(
                 getAllProductsUseCase: sl(),
               )..getAllProducts("All"),
+            ),
+            BlocProvider(
+              create: (_) => ProfileCubit(
+                getProfileUseCase: sl(),
+                getUserIdCase: sl(),
+              )..getProfile(),
             ),
           ],
           child: MaterialApp(

@@ -38,7 +38,7 @@ class SignInCubit extends Cubit<SignInState> {
       },
       (result) async {
         await cacheTokenUseCase.call(result.token);
-        await cacheUserIdUseCase.call("8"); // hard code
+        await cacheUserIdUseCase.call("2"); // hard code
 
         final cacheUserAddressStatus =
             await getCacheUserAddressStatusUseCase.call(const NoParams());

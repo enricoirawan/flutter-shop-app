@@ -4,10 +4,10 @@ import 'package:flutter_shop_app/core/use_case/use_case.dart';
 
 import '../repository/authentication_repository.dart';
 
-class GetUserIdCase extends UseCase<String, NoParams> {
+class GetUserIdUseCase extends UseCase<String, NoParams> {
   final AuthenticationRepository authenticationRepository;
 
-  GetUserIdCase({required this.authenticationRepository});
+  GetUserIdUseCase({required this.authenticationRepository});
 
   @override
   Future<Either<Failure, String>> call(NoParams params) async {

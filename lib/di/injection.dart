@@ -1,19 +1,24 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_shop_app/common/navigation/router/cart_route.dart';
 import 'package:flutter_shop_app/common/navigation/router/home_route.dart';
 import 'package:flutter_shop_app/data/datasource/local/address_local_sources.dart';
 import 'package:flutter_shop_app/data/datasource/remote/address_remote_datasouces.dart';
 import 'package:flutter_shop_app/data/datasource/remote/product_remote_datasources.dart';
+import 'package:flutter_shop_app/data/datasource/remote/profile_remote_datasource.dart';
 import 'package:flutter_shop_app/data/repository/address_repository_impl.dart';
 import 'package:flutter_shop_app/data/repository/authentication_repository_impl.dart';
 import 'package:flutter_shop_app/data/repository/product_repository_impl.dart';
+import 'package:flutter_shop_app/data/repository/profile_repository_impl.dart';
 import 'package:flutter_shop_app/domain/repository/address_repository.dart';
 import 'package:flutter_shop_app/domain/repository/authentication_repository.dart';
 import 'package:flutter_shop_app/domain/repository/product_repository.dart';
+import 'package:flutter_shop_app/domain/repository/profile_repository.dart';
 import 'package:flutter_shop_app/domain/usecase/cache_get_user_address_usecase.dart';
 import 'package:flutter_shop_app/domain/usecase/cache_token_usecase.dart';
 import 'package:flutter_shop_app/domain/usecase/cache_user_id_usecase.dart';
 import 'package:flutter_shop_app/domain/usecase/get_all_categories_usecase.dart';
 import 'package:flutter_shop_app/domain/usecase/get_all_products_usecase.dart';
+import 'package:flutter_shop_app/domain/usecase/get_profile_usecase.dart';
 import 'package:flutter_shop_app/domain/usecase/get_token_use_case.dart';
 import 'package:flutter_shop_app/domain/usecase/get_user_address_usecase.dart';
 import 'package:flutter_shop_app/domain/usecase/get_user_id_use_case.dart';
@@ -24,6 +29,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../common/navigation/navigation_helper.dart';
 import '../common/navigation/router/auth_route.dart';
+import '../core/database/database.dart';
 import '../core/network/dio_handler.dart';
 import '../common/get_it.dart';
 import '../data/datasource/local/authentication_local_datasources.dart';
@@ -61,6 +67,10 @@ class Injection {
       () => ProductRemoteDataSourcesImpl(dio: sl()),
     );
 
+    sl.registerLazySingleton<ProfileRemoteDataSources>(
+      () => ProfileRemoteDataSourcesImpl(dio: sl()),
+    );
+
     sl.registerLazySingleton<AuthenticationRepository>(
       () => AuthenticationRepositoryImpl(
         authenticationLocalDataSource: sl(),
@@ -78,6 +88,10 @@ class Injection {
     sl.registerLazySingleton<ProductRepository>(
       () => ProductRepositoryImpl(productRemoteDataSources: sl()),
     );
+
+    sl.registerLazySingleton<ProfileRepository>(
+      () => ProfileRepositoryImpl(profileRemoteDataSources: sl()),
+    );
   }
 
   void _registerDomain() {
@@ -91,8 +105,8 @@ class Injection {
         authenticationRepository: sl(),
       ),
     );
-    sl.registerLazySingleton<GetUserIdCase>(
-      () => GetUserIdCase(
+    sl.registerLazySingleton<GetUserIdUseCase>(
+      () => GetUserIdUseCase(
         authenticationRepository: sl(),
       ),
     );
@@ -141,6 +155,11 @@ class Injection {
         productRepository: sl(),
       ),
     );
+    sl.registerLazySingleton<GetProfileUseCase>(
+      () => GetProfileUseCase(
+        profileRepository: sl(),
+      ),
+    );
   }
 
   Future<void> _registerCore() async {
@@ -152,6 +171,10 @@ class Injection {
       ),
     );
     sl.registerLazySingleton<Dio>(() => sl<DioHandler>().dio);
+
+    final AppDatabase database =
+        await $FloorAppDatabase.databaseBuilder('app_database.db').build();
+    sl.registerLazySingleton<AppDatabase>(() => database);
   }
 
   void _registerCommon() {
@@ -167,6 +190,12 @@ class Injection {
 
     sl.registerLazySingleton<HomeRouter>(
       () => HomeRouterImpl(
+        navigationHelper: sl(),
+      ),
+    );
+
+    sl.registerLazySingleton<CartRouter>(
+      () => CartRouterImpl(
         navigationHelper: sl(),
       ),
     );

@@ -18,7 +18,7 @@ class GetUserPositionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthRouter authRouter = sl();
 
-    context.read<AddressCubit>().getUserAddress();
+    context.read<AddressCubit>().getUserPosition();
 
     return BlocListener<AddressCubit, AddressState>(
       listener: (context, state) {
