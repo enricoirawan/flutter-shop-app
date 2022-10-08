@@ -59,12 +59,6 @@ class _MainScreenState extends State<MainScreen> {
             },
             activeColor: primaryColor,
             inactiveColor: grayColor,
-            shadow: const BoxShadow(
-              offset: Offset(0, -2),
-              spreadRadius: -10,
-              blurRadius: 5,
-              color: Color.fromRGBO(155, 155, 155, 1),
-            ),
             //other params
           );
         },
