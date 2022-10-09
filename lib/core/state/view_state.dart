@@ -25,8 +25,12 @@ class ViewData<T> extends Equatable {
     this.failure,
   });
 
-  factory ViewData.loaded({T? data}) {
-    return ViewData._(status: ViewState.hasData, data: data);
+  factory ViewData.loaded({T? data, String? message}) {
+    return ViewData._(
+      status: ViewState.hasData,
+      data: data,
+      message: message ?? "",
+    );
   }
 
   factory ViewData.error({

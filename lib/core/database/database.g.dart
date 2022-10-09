@@ -85,7 +85,7 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `Cart` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `productTitle` TEXT NOT NULL, `price` REAL NOT NULL, `amount` INTEGER NOT NULL)');
+            'CREATE TABLE IF NOT EXISTS `Cart` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `productTitle` TEXT NOT NULL, `price` REAL NOT NULL, `amount` INTEGER NOT NULL, `image` TEXT NOT NULL)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -111,7 +111,8 @@ class _$CartDao extends CartDao {
                   'id': item.id,
                   'productTitle': item.productTitle,
                   'price': item.price,
-                  'amount': item.amount
+                  'amount': item.amount,
+                  'image': item.image
                 }),
         _cartUpdateAdapter = UpdateAdapter(
             database,
@@ -121,7 +122,8 @@ class _$CartDao extends CartDao {
                   'id': item.id,
                   'productTitle': item.productTitle,
                   'price': item.price,
-                  'amount': item.amount
+                  'amount': item.amount,
+                  'image': item.image
                 }),
         _cartDeletionAdapter = DeletionAdapter(
             database,
@@ -131,7 +133,8 @@ class _$CartDao extends CartDao {
                   'id': item.id,
                   'productTitle': item.productTitle,
                   'price': item.price,
-                  'amount': item.amount
+                  'amount': item.amount,
+                  'image': item.image
                 });
 
   final sqflite.DatabaseExecutor database;
@@ -153,7 +156,8 @@ class _$CartDao extends CartDao {
             id: row['id'] as int,
             productTitle: row['productTitle'] as String,
             price: row['price'] as double,
-            amount: row['amount'] as int));
+            amount: row['amount'] as int,
+            image: row['image'] as String));
   }
 
   @override

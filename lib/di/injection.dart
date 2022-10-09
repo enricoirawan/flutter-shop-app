@@ -1,21 +1,25 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_shop_app/common/navigation/router/cart_route.dart';
 import 'package:flutter_shop_app/common/navigation/router/home_route.dart';
-import 'package:flutter_shop_app/data/datasource/local/address_local_sources.dart';
+import 'package:flutter_shop_app/data/datasource/local/address_local_datasources.dart';
+import 'package:flutter_shop_app/data/datasource/local/cart_local_datasource.dart';
 import 'package:flutter_shop_app/data/datasource/remote/address_remote_datasouces.dart';
 import 'package:flutter_shop_app/data/datasource/remote/product_remote_datasources.dart';
 import 'package:flutter_shop_app/data/datasource/remote/profile_remote_datasource.dart';
 import 'package:flutter_shop_app/data/repository/address_repository_impl.dart';
 import 'package:flutter_shop_app/data/repository/authentication_repository_impl.dart';
+import 'package:flutter_shop_app/data/repository/cart_repository_impl.dart';
 import 'package:flutter_shop_app/data/repository/product_repository_impl.dart';
 import 'package:flutter_shop_app/data/repository/profile_repository_impl.dart';
 import 'package:flutter_shop_app/domain/repository/address_repository.dart';
 import 'package:flutter_shop_app/domain/repository/authentication_repository.dart';
+import 'package:flutter_shop_app/domain/repository/cart_repository.dart';
 import 'package:flutter_shop_app/domain/repository/product_repository.dart';
 import 'package:flutter_shop_app/domain/repository/profile_repository.dart';
 import 'package:flutter_shop_app/domain/usecase/cache_get_user_address_usecase.dart';
 import 'package:flutter_shop_app/domain/usecase/cache_token_usecase.dart';
 import 'package:flutter_shop_app/domain/usecase/cache_user_id_usecase.dart';
+import 'package:flutter_shop_app/domain/usecase/get_all_carts_usecase.dart';
 import 'package:flutter_shop_app/domain/usecase/get_all_categories_usecase.dart';
 import 'package:flutter_shop_app/domain/usecase/get_all_products_usecase.dart';
 import 'package:flutter_shop_app/domain/usecase/get_profile_usecase.dart';
@@ -23,8 +27,10 @@ import 'package:flutter_shop_app/domain/usecase/get_token_use_case.dart';
 import 'package:flutter_shop_app/domain/usecase/get_user_address_usecase.dart';
 import 'package:flutter_shop_app/domain/usecase/get_user_id_use_case.dart';
 import 'package:flutter_shop_app/domain/usecase/get_user_position_usecase.dart';
+import 'package:flutter_shop_app/domain/usecase/insert_cart_usecase.dart';
 import 'package:flutter_shop_app/domain/usecase/save_user_address_usecase.dart';
 import 'package:flutter_shop_app/domain/usecase/sign_in_usecase.dart';
+import 'package:flutter_shop_app/domain/usecase/update_cart_usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../common/navigation/navigation_helper.dart';
@@ -34,6 +40,7 @@ import '../core/network/dio_handler.dart';
 import '../common/get_it.dart';
 import '../data/datasource/local/authentication_local_datasources.dart';
 import '../data/datasource/remote/authentication_remote_datasources.dart';
+import '../domain/usecase/delete_cart_usecase.dart';
 import '../domain/usecase/get_cache_user_address_status_usecase.dart';
 
 class Injection {
@@ -71,6 +78,10 @@ class Injection {
       () => ProfileRemoteDataSourcesImpl(dio: sl()),
     );
 
+    sl.registerLazySingleton<CartLocalDataSources>(
+      () => CartLocalDataSourcesImpl(appDatabase: sl()),
+    );
+
     sl.registerLazySingleton<AuthenticationRepository>(
       () => AuthenticationRepositoryImpl(
         authenticationLocalDataSource: sl(),
@@ -91,6 +102,10 @@ class Injection {
 
     sl.registerLazySingleton<ProfileRepository>(
       () => ProfileRepositoryImpl(profileRemoteDataSources: sl()),
+    );
+
+    sl.registerLazySingleton<CartRepository>(
+      () => CartRepositoryImpl(cartLocalDataSources: sl()),
     );
   }
 
@@ -158,6 +173,26 @@ class Injection {
     sl.registerLazySingleton<GetProfileUseCase>(
       () => GetProfileUseCase(
         profileRepository: sl(),
+      ),
+    );
+    sl.registerLazySingleton<GetAllCartsUseCase>(
+      () => GetAllCartsUseCase(
+        cartRepository: sl(),
+      ),
+    );
+    sl.registerLazySingleton<InsertCartsUseCase>(
+      () => InsertCartsUseCase(
+        cartRepository: sl(),
+      ),
+    );
+    sl.registerLazySingleton<UpdateCartUseCase>(
+      () => UpdateCartUseCase(
+        cartRepository: sl(),
+      ),
+    );
+    sl.registerLazySingleton<DeleteCartUseCase>(
+      () => DeleteCartUseCase(
+        cartRepository: sl(),
       ),
     );
   }

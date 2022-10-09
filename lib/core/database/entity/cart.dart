@@ -7,11 +7,13 @@ class Cart {
   final String productTitle;
   final double price;
   final int amount;
+  final String image;
 
   const Cart({
-    this.id = 0,
+    required this.id,
     required this.productTitle,
     required this.price,
     required this.amount,
+    required this.image,
   });
 }

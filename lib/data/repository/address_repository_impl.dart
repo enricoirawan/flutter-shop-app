@@ -1,6 +1,6 @@
 import 'package:flutter_shop_app/common/failure.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter_shop_app/data/datasource/local/address_local_sources.dart';
+import 'package:flutter_shop_app/data/datasource/local/address_local_datasources.dart';
 import 'package:flutter_shop_app/data/datasource/remote/address_remote_datasouces.dart';
 import 'package:flutter_shop_app/domain/repository/address_repository.dart';
 

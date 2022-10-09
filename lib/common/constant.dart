@@ -50,6 +50,16 @@ class ErrorMessage {
 
   String get failedGetUserId => 'failed get user id';
 
+  String get failedGetCarts => 'failed get carts';
+
+  String get failedInsertCart => 'failed insert cart';
+
+  String get productAlredyExistOnTheCart => 'product alredy exist on the cart';
+
+  String get failedUpdateCart => 'failed update cart';
+
+  String get failedDeleteCart => 'failed delete carts';
+
   String get signUpFeature => 'sign up feature not ready yet';
 
   String get loginWithGoogle => 'login with google feature not ready yet';
@@ -61,4 +71,6 @@ class SuccessMessage {
   const SuccessMessage();
 
   String get saveAddressSuccess => "Address have set successfully";
+
+  String get successDeletedProduct => "Product has been deleted";
 }

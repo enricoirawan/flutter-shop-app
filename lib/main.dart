@@ -6,6 +6,7 @@ import 'package:flutter_shop_app/common/navigation/argument/detail_product_argum
 import 'package:flutter_shop_app/common/navigation/navigation_helper.dart';
 import 'package:flutter_shop_app/common/styles.dart';
 import 'package:flutter_shop_app/presentation/bloc/address_bloc/address_cubit.dart';
+import 'package:flutter_shop_app/presentation/bloc/cart_bloc/cart_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/product_bloc/product_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/product_category/product_category_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/profile_bloc/profile_cubit.dart';
@@ -81,6 +82,14 @@ class MyApp extends StatelessWidget {
                 getProfileUseCase: sl(),
                 getUserIdCase: sl(),
               )..getProfile(),
+            ),
+            BlocProvider(
+              create: (_) => CartCubit(
+                getAllCartsUseCase: sl(),
+                insertCartsUseCase: sl(),
+                updateCartUseCase: sl(),
+                deleteCartUseCase: sl(),
+              ),
             ),
           ],
           child: MaterialApp(
