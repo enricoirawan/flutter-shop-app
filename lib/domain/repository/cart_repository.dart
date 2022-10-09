@@ -8,4 +8,5 @@ abstract class CartRepository {
   Future<Either<Failure, bool>> insertCart(Cart cart);
   Future<Either<Failure, bool>> updateCart(Cart cart);
   Future<Either<Failure, bool>> deleteCart(Cart cart);
+  Future<Either<Failure, bool>> clearCart();
 }

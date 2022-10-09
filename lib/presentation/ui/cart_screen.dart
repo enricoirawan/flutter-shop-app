@@ -3,6 +3,8 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_shop_app/common/navigation/argument/checkout_argument.dart';
+import 'package:flutter_shop_app/common/navigation/router/checkout_route.dart';
 import 'package:flutter_shop_app/common/styles.dart';
 import 'package:flutter_shop_app/core/state/view_state.dart';
 import 'package:flutter_shop_app/presentation/bloc/cart_bloc/cart_cubit.dart';
@@ -10,6 +12,7 @@ import 'package:flutter_shop_app/presentation/widget/cart.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../common/constant.dart';
+import '../../common/get_it.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -19,6 +22,7 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  final CheckoutRouter _checkoutRouter = sl();
   double shippingCost = 10;
 
   @override
@@ -125,6 +129,7 @@ class _CartScreenState extends State<CartScreen> {
                                       .textTheme
                                       .headline5!
                                       .copyWith(
+                                        fontWeight: FontWeight.bold,
                                         color: primaryColor,
                                       ),
                                 ),
@@ -151,6 +156,7 @@ class _CartScreenState extends State<CartScreen> {
                                       .textTheme
                                       .headline5!
                                       .copyWith(
+                                        fontWeight: FontWeight.bold,
                                         color: primaryColor,
                                       ),
                                 ),
@@ -211,6 +217,7 @@ class _CartScreenState extends State<CartScreen> {
                                   .textTheme
                                   .headline5!
                                   .copyWith(
+                                    fontWeight: FontWeight.bold,
                                     color: primaryColor,
                                   ),
                             ),
@@ -228,12 +235,25 @@ class _CartScreenState extends State<CartScreen> {
                 BlocBuilder<CartCubit, CartState>(
                   builder: (context, state) {
                     final status = state.cartState.status;
+                    final carts = state.cartState.data ?? [];
+
+                    final total =
+                        carts.fold<double>(0, (sum, item) => sum + item.price) +
+                            10;
 
                     if (status.isHasData) {
                       return Container(
                         margin: EdgeInsets.symmetric(horizontal: 16.w),
                         child: MaterialButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            CheckoutArgument checkoutArgument =
+                                CheckoutArgument(
+                              total: total,
+                              carts: carts,
+                            );
+                            _checkoutRouter
+                                .navigateToCheckout(checkoutArgument);
+                          },
                           color: primaryColor,
                           minWidth: double.infinity,
                           height: 40.h,

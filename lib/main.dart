@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_shop_app/common/get_it.dart';
+import 'package:flutter_shop_app/common/navigation/argument/checkout_argument.dart';
 import 'package:flutter_shop_app/common/navigation/argument/detail_product_argument.dart';
 import 'package:flutter_shop_app/common/navigation/navigation_helper.dart';
 import 'package:flutter_shop_app/common/styles.dart';
@@ -14,10 +15,13 @@ import 'package:flutter_shop_app/presentation/bloc/product_category/product_cate
 import 'package:flutter_shop_app/presentation/bloc/profile_bloc/profile_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/signin_bloc/signin_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/splash_bloc/splash_cubit.dart';
+import 'package:flutter_shop_app/presentation/bloc/transaction/transaction_cubit.dart';
+import 'package:flutter_shop_app/presentation/ui/checkout_screen.dart';
 import 'package:flutter_shop_app/presentation/ui/detail_product_screen.dart';
 import 'package:flutter_shop_app/presentation/ui/get_user_position.dart';
 import 'package:flutter_shop_app/presentation/ui/main_screen.dart';
 import 'package:flutter_shop_app/presentation/ui/onboard_screen.dart';
+import 'package:flutter_shop_app/presentation/ui/payment_success_screen.dart';
 import 'package:flutter_shop_app/presentation/ui/signin_screen.dart';
 import 'package:flutter_shop_app/presentation/ui/splash_screen.dart';
 
@@ -98,6 +102,13 @@ class MyApp extends StatelessWidget {
                 logoutUseCase: sl(),
               ),
             ),
+            BlocProvider(
+              create: (_) => TransactionCubit(
+                getAllTransactionsUseCase: sl(),
+                insertTransactionUseCase: sl(),
+                clearCartUseCase: sl(),
+              ),
+            ),
           ],
           child: MaterialApp(
             title: 'Flutter Shop App',
@@ -152,6 +163,20 @@ class MyApp extends StatelessWidget {
                       return DetailProductScreen(
                         argument: argument as DetailProductArgument,
                       );
+                    },
+                  );
+                case AppRoutes.checkout:
+                  return MaterialPageRoute(
+                    builder: (_) {
+                      return CheckoutScreen(
+                        checkoutArgument: argument as CheckoutArgument,
+                      );
+                    },
+                  );
+                case AppRoutes.paymentSuccess:
+                  return MaterialPageRoute(
+                    builder: (_) {
+                      return const PaymentSuccess();
                     },
                   );
               }

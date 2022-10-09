@@ -63,6 +63,8 @@ class _$AppDatabase extends AppDatabase {
 
   CartDao? _cartDaoInstance;
 
+  TransactionDao? _transactionDaoInstance;
+
   Future<sqflite.Database> open(
     String path,
     List<Migration> migrations, [
@@ -86,6 +88,8 @@ class _$AppDatabase extends AppDatabase {
       onCreate: (database, version) async {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `Cart` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `productTitle` TEXT NOT NULL, `price` REAL NOT NULL, `amount` INTEGER NOT NULL, `image` TEXT NOT NULL)');
+        await database.execute(
+            'CREATE TABLE IF NOT EXISTS `TransactionData` (`id` TEXT NOT NULL, `total` REAL NOT NULL, `purcashedProductTitle` TEXT NOT NULL, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -96,6 +100,12 @@ class _$AppDatabase extends AppDatabase {
   @override
   CartDao get cartDao {
     return _cartDaoInstance ??= _$CartDao(database, changeListener);
+  }
+
+  @override
+  TransactionDao get transactionDao {
+    return _transactionDaoInstance ??=
+        _$TransactionDao(database, changeListener);
   }
 }
 
@@ -161,6 +171,11 @@ class _$CartDao extends CartDao {
   }
 
   @override
+  Future<bool?> clearCarts() async {
+    await _queryAdapter.queryNoReturn('DELETE FROM Cart');
+  }
+
+  @override
   Future<int> insertCart(Cart cart) {
     return _cartInsertionAdapter.insertAndReturnId(
         cart, OnConflictStrategy.abort);
@@ -175,5 +190,43 @@ class _$CartDao extends CartDao {
   @override
   Future<int> deleteCart(Cart cart) {
     return _cartDeletionAdapter.deleteAndReturnChangedRows(cart);
+  }
+}
+
+class _$TransactionDao extends TransactionDao {
+  _$TransactionDao(
+    this.database,
+    this.changeListener,
+  )   : _queryAdapter = QueryAdapter(database),
+        _transactionDataInsertionAdapter = InsertionAdapter(
+            database,
+            'TransactionData',
+            (TransactionData item) => <String, Object?>{
+                  'id': item.id,
+                  'total': item.total,
+                  'purcashedProductTitle': item.purcashedProductTitle
+                });
+
+  final sqflite.DatabaseExecutor database;
+
+  final StreamController<String> changeListener;
+
+  final QueryAdapter _queryAdapter;
+
+  final InsertionAdapter<TransactionData> _transactionDataInsertionAdapter;
+
+  @override
+  Future<List<TransactionData>> getAllTransactions() async {
+    return _queryAdapter.queryList('SELECT * FROM TransactionData',
+        mapper: (Map<String, Object?> row) => TransactionData(
+            id: row['id'] as String,
+            total: row['total'] as double,
+            purcashedProductTitle: row['purcashedProductTitle'] as String));
+  }
+
+  @override
+  Future<int> insertTransaction(TransactionData transaction) {
+    return _transactionDataInsertionAdapter.insertAndReturnId(
+        transaction, OnConflictStrategy.abort);
   }
 }

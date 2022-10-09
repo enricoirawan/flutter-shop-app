@@ -56,4 +56,16 @@ class CartRepositoryImpl implements CartRepository {
       return Left(DatabaseFailure(error.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> clearCart() async {
+    try {
+      final result = await cartLocalDataSources.clearCart();
+      return Right(result);
+    } on DatabaseFailure catch (error) {
+      return Left(DatabaseFailure(error.message));
+    } on Exception catch (error) {
+      return Left(DatabaseFailure(error.toString()));
+    }
+  }
 }

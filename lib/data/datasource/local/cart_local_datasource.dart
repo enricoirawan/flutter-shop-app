@@ -10,6 +10,7 @@ abstract class CartLocalDataSources {
   Future<bool> insertCart(Cart cart);
   Future<bool> updateCart(Cart cart);
   Future<bool> deleteCart(Cart cart);
+  Future<bool> clearCart();
 }
 
 class CartLocalDataSourcesImpl implements CartLocalDataSources {
@@ -60,6 +61,16 @@ class CartLocalDataSourcesImpl implements CartLocalDataSources {
     try {
       final result = await appDatabase.cartDao.deleteCart(cart);
       return result > 0 ? true : false;
+    } on DatabaseException catch (_) {
+      throw DatabaseFailure(AppConstants.errorMessage.failedDeleteCart);
+    }
+  }
+
+  @override
+  Future<bool> clearCart() async {
+    try {
+      final result = await appDatabase.cartDao.clearCarts();
+      return result == null ? false : true;
     } on DatabaseException catch (_) {
       throw DatabaseFailure(AppConstants.errorMessage.failedDeleteCart);
     }

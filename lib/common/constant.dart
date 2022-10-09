@@ -54,6 +54,10 @@ class ErrorMessage {
 
   String get failedGetCarts => 'failed get carts';
 
+  String get failedInsertTransaction => 'failed insert transaction';
+
+  String get failedGetTransactions => 'failed get transactions';
+
   String get failedInsertCart => 'failed insert cart';
 
   String get productAlredyExistOnTheCart => 'product alredy exist on the cart';

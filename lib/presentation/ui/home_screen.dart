@@ -13,6 +13,7 @@ import 'package:flutter_shop_app/presentation/widget/logo.dart';
 import 'package:flutter_shop_app/presentation/widget/product.dart';
 import 'package:flutter_shop_app/presentation/widget/product_shimmer.dart';
 import 'package:flutter_shop_app/presentation/widget/search.dart';
+import 'package:lottie/lottie.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -122,6 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 builder: (context, state) {
                   final status = state.productCategoryState.status;
                   final categories = state.productCategoryState.data;
+
                   if (status.isLoading) {
                     return const CategoryShimmerWidget();
                   } else if (status.isHasData) {
@@ -145,9 +147,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         scrollDirection: Axis.horizontal,
                       ),
                     );
+                  } else {
+                    return Container(
+                      margin: EdgeInsets.only(top: 50.h),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          LottieBuilder.asset(
+                            "assets/error.json",
+                            height: 150.h,
+                          ),
+                          Text(state.productCategoryState.message),
+                        ],
+                      ),
+                    );
                   }
-
-                  return Container();
                 },
               ),
               //End: Categories

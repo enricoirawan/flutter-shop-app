@@ -7,6 +7,9 @@ abstract class CartDao {
   @Query('SELECT * FROM Cart')
   Future<List<Cart>> getAllCarts();
 
+  @Query('DELETE FROM Cart')
+  Future<bool?> clearCarts();
+
   @insert
   Future<int> insertCart(Cart cart);
 
