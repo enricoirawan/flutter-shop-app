@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:floor/floor.dart';
 
 @entity
-class TransactionData {
+class TransactionData extends Equatable {
   @PrimaryKey()
   final String id;
   final double total;
@@ -12,4 +13,11 @@ class TransactionData {
     required this.total,
     required this.purcashedProductTitle,
   });
+
+  @override
+  List<Object?> get props => [
+        id,
+        total,
+        purcashedProductTitle,
+      ];
 }

@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:floor/floor.dart';
 
 @entity
-class Cart {
+class Cart extends Equatable {
   @PrimaryKey(autoGenerate: true)
   final int id;
   final String productTitle;
@@ -16,4 +17,13 @@ class Cart {
     required this.amount,
     required this.image,
   });
+
+  @override
+  List<Object?> get props => [
+        id,
+        productTitle,
+        price,
+        amount,
+        image,
+      ];
 }
