@@ -37,7 +37,7 @@ class AuthRouterImpl implements AuthRouter {
 
   @override
   void navigateToHome() {
-    navigationHelper.pushReplacementNamed(AppRoutes.main);
+    navigationHelper.pushNamedAndRemoveUntil(AppRoutes.main);
   }
 
   @override

@@ -15,7 +15,7 @@ import 'package:flutter_shop_app/presentation/bloc/product_category/product_cate
 import 'package:flutter_shop_app/presentation/bloc/profile_bloc/profile_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/signin_bloc/signin_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/splash_bloc/splash_cubit.dart';
-import 'package:flutter_shop_app/presentation/bloc/transaction/transaction_cubit.dart';
+import 'package:flutter_shop_app/presentation/bloc/transaction_bloc/transaction_cubit.dart';
 import 'package:flutter_shop_app/presentation/ui/checkout_screen.dart';
 import 'package:flutter_shop_app/presentation/ui/detail_product_screen.dart';
 import 'package:flutter_shop_app/presentation/ui/get_user_position.dart';

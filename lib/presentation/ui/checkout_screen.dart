@@ -9,7 +9,7 @@ import 'package:flutter_shop_app/common/styles.dart';
 import 'package:flutter_shop_app/core/database/entity/transaction_data.dart';
 import 'package:flutter_shop_app/core/state/view_state.dart';
 import 'package:flutter_shop_app/presentation/bloc/address_bloc/address_cubit.dart';
-import 'package:flutter_shop_app/presentation/bloc/transaction/transaction_cubit.dart';
+import 'package:flutter_shop_app/presentation/bloc/transaction_bloc/transaction_cubit.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:uuid/uuid.dart';
 
