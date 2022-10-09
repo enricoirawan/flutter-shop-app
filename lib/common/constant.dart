@@ -44,6 +44,8 @@ class ErrorMessage {
 
   String get failedGetToken => 'failed get token';
 
+  String get logoutFailed => 'logout failed';
+
   String get failedGetAddress => 'failed get address';
 
   String get failedGetUserAddressStatus => 'failed get user address status';

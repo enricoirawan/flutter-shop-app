@@ -27,7 +27,7 @@ class AuthRouterImpl implements AuthRouter {
 
   @override
   void navigateToSplash() {
-    navigationHelper.pushNamedAndRemoveUntil(AppRoutes.splash);
+    navigationHelper.pushReplacementNamed(AppRoutes.splash);
   }
 
   @override

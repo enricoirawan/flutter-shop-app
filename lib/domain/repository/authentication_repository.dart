@@ -10,6 +10,7 @@ abstract class AuthenticationRepository {
   Future<Either<Failure, bool>> cacheUserId({required String userId});
   Future<Either<Failure, String>> getUserId();
   Future<Either<Failure, String>> getToken();
+  Future<Either<Failure, bool>> logout();
   Future<Either<Failure, AuthenticationResponseEntity>> signIn({
     required AuthenticationRequestEntity authenticationRequestEntity,
   });

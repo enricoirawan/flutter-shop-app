@@ -28,6 +28,7 @@ import 'package:flutter_shop_app/domain/usecase/get_user_address_usecase.dart';
 import 'package:flutter_shop_app/domain/usecase/get_user_id_use_case.dart';
 import 'package:flutter_shop_app/domain/usecase/get_user_position_usecase.dart';
 import 'package:flutter_shop_app/domain/usecase/insert_cart_usecase.dart';
+import 'package:flutter_shop_app/domain/usecase/logout_usecase.dart';
 import 'package:flutter_shop_app/domain/usecase/save_user_address_usecase.dart';
 import 'package:flutter_shop_app/domain/usecase/sign_in_usecase.dart';
 import 'package:flutter_shop_app/domain/usecase/update_cart_usecase.dart';
@@ -132,6 +133,11 @@ class Injection {
     );
     sl.registerLazySingleton<GetTokenUseCase>(
       () => GetTokenUseCase(
+        authenticationRepository: sl(),
+      ),
+    );
+    sl.registerLazySingleton<LogoutUseCase>(
+      () => LogoutUseCase(
         authenticationRepository: sl(),
       ),
     );

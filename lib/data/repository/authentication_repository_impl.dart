@@ -69,4 +69,14 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       return Left(ServerFailure(error.response.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> logout() async {
+    try {
+      bool result = await authenticationLocalDataSource.logout();
+      return Right(result);
+    } on Exception catch (error) {
+      return Left(DatabaseFailure(error.toString()));
+    }
+  }
 }

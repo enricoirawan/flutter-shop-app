@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_shop_app/common/get_it.dart';
 import 'package:flutter_shop_app/common/navigation/argument/detail_product_argument.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_shop_app/common/navigation/navigation_helper.dart';
 import 'package:flutter_shop_app/common/styles.dart';
 import 'package:flutter_shop_app/presentation/bloc/address_bloc/address_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/cart_bloc/cart_cubit.dart';
+import 'package:flutter_shop_app/presentation/bloc/logout_bloc/logout_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/product_bloc/product_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/product_category/product_category_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/profile_bloc/profile_cubit.dart';
@@ -26,7 +28,7 @@ import 'presentation/bloc/bottom_nav_bloc/bottom_nav_cubit.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Injection().initialize();
-  runApp(const MyApp());
+  runApp(Phoenix(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -89,6 +91,11 @@ class MyApp extends StatelessWidget {
                 insertCartsUseCase: sl(),
                 updateCartUseCase: sl(),
                 deleteCartUseCase: sl(),
+              ),
+            ),
+            BlocProvider(
+              create: (_) => LogoutCubit(
+                logoutUseCase: sl(),
               ),
             ),
           ],

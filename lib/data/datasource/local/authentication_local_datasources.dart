@@ -10,6 +10,7 @@ abstract class AuthenticationLocalDataSource {
   Future<bool> cacheUserId({required String userId});
   Future<String> getUserId();
   Future<String> getToken();
+  Future<bool> logout();
 }
 
 class AuthenticationLocalDataSourceImpl
@@ -51,6 +52,15 @@ class AuthenticationLocalDataSourceImpl
       return sharedPreferences.getString(AppConstants.cachedKey.tokenKey) ?? "";
     } catch (_) {
       throw DatabaseFailure(AppConstants.errorMessage.failedGetToken);
+    }
+  }
+
+  @override
+  Future<bool> logout() {
+    try {
+      return sharedPreferences.clear();
+    } catch (_) {
+      throw DatabaseFailure(AppConstants.errorMessage.logoutFailed);
     }
   }
 }
