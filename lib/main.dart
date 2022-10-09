@@ -107,7 +107,7 @@ class MyApp extends StatelessWidget {
                 getAllTransactionsUseCase: sl(),
                 insertTransactionUseCase: sl(),
                 clearCartUseCase: sl(),
-              ),
+              )..getAllTransactions(),
             ),
           ],
           child: MaterialApp(

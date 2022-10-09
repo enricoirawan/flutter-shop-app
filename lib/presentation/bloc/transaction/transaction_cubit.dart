@@ -21,7 +21,7 @@ class TransactionCubit extends Cubit<TransactionState> {
   }) : super(TransactionState(transactionState: ViewData.initial()));
 
   void getAllTransactions() async {
-    emit(TransactionState(transactionState: ViewData.loaded()));
+    emit(TransactionState(transactionState: ViewData.loading()));
 
     final result = await getAllTransactionsUseCase.call(const NoParams());
 
@@ -84,6 +84,12 @@ class TransactionCubit extends Cubit<TransactionState> {
           emit(
             TransactionState(
               transactionState: ViewData.loaded(),
+            ),
+          );
+          //add this to update the state
+          emit(
+            TransactionState(
+              transactionState: ViewData.noData(message: ""),
             ),
           );
         });
