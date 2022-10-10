@@ -195,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   } else if (status.isHasData) {
                     return SizedBox(
-                      height: MediaQuery.of(context).size.height / 1.85,
+                      height: MediaQuery.of(context).size.height / 1.70,
                       child: GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
