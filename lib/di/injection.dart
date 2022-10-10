@@ -50,6 +50,7 @@ import '../data/datasource/local/authentication_local_datasources.dart';
 import '../data/datasource/remote/authentication_remote_datasources.dart';
 import '../domain/usecase/delete_cart_usecase.dart';
 import '../domain/usecase/get_cache_user_address_status_usecase.dart';
+import '../domain/usecase/get_product_detail_usecase.dart';
 
 class Injection {
   Future<void> initialize() async {
@@ -188,6 +189,11 @@ class Injection {
     );
     sl.registerLazySingleton<GetAllProductsUseCase>(
       () => GetAllProductsUseCase(
+        productRepository: sl(),
+      ),
+    );
+    sl.registerLazySingleton<GetProductDetailUseCase>(
+      () => GetProductDetailUseCase(
         productRepository: sl(),
       ),
     );

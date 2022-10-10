@@ -20,8 +20,8 @@ class ProductWidget extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        homeRouter
-            .navigateToDetailProduct(DetailProductArgument(product: product));
+        homeRouter.navigateToDetailProduct(
+            DetailProductArgument(productId: product.id));
       },
       child: Container(
         height: 300.h,

@@ -12,6 +12,7 @@ import 'package:flutter_shop_app/presentation/bloc/cart_bloc/cart_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/logout_bloc/logout_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/product_bloc/product_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/product_category/product_category_cubit.dart';
+import 'package:flutter_shop_app/presentation/bloc/product_detail/product_detail_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/profile_bloc/profile_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/signin_bloc/signin_cubit.dart';
 import 'package:flutter_shop_app/presentation/bloc/splash_bloc/splash_cubit.dart';
@@ -82,6 +83,11 @@ class MyApp extends StatelessWidget {
               create: (_) => ProductCubit(
                 getAllProductsUseCase: sl(),
               )..getAllProducts("All"),
+            ),
+            BlocProvider(
+              create: (_) => ProductDetailCubit(
+                getProductDetailUseCase: sl(),
+              ),
             ),
             BlocProvider(
               create: (_) => ProfileCubit(

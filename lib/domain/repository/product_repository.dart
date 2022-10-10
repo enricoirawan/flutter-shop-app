@@ -5,4 +5,5 @@ import 'package:flutter_shop_app/domain/entity/response/product_entity.dart';
 abstract class ProductRepository {
   Future<Either<Failure, List<dynamic>>> getAllCategories();
   Future<Either<Failure, List<ProductEntity>>> getAllProducts(String category);
+  Future<Either<Failure, ProductEntity>> getProductDetail(int productId);
 }

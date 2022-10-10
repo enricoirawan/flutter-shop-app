@@ -37,4 +37,16 @@ class ProductRepositoryImpl implements ProductRepository {
       return Left(ServerFailure(error.response.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, ProductEntity>> getProductDetail(int productId) async {
+    try {
+      final response =
+          await productRemoteDataSources.getProductDetail(productId);
+
+      return Right(response.mapToEntity());
+    } on DioError catch (error) {
+      return Left(ServerFailure(error.response.toString()));
+    }
+  }
 }

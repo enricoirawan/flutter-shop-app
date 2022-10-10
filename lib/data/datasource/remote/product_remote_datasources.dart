@@ -6,6 +6,7 @@ import '../../../common/constant.dart';
 abstract class ProductRemoteDataSources {
   Future<List<dynamic>> getAllCategories();
   Future<List<ProductResponseDto>> getAllProducts(String category);
+  Future<ProductResponseDto> getProductDetail(int productId);
 }
 
 class ProductRemoteDataSourcesImpl implements ProductRemoteDataSources {
@@ -42,6 +43,19 @@ class ProductRemoteDataSourcesImpl implements ProductRemoteDataSources {
       }
 
       return products;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<ProductResponseDto> getProductDetail(int productId) async {
+    try {
+      final response = await dio.get(
+        "${AppConstants.appApi.baseUrl}${AppConstants.appApi.products}$productId",
+      );
+
+      return ProductResponseDto.fromJson(response.data);
     } catch (e) {
       rethrow;
     }
