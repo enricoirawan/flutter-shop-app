@@ -189,7 +189,7 @@ class MyApp extends StatelessWidget {
                 case AppRoutes.historyTransactions:
                   return MaterialPageRoute(
                     builder: (_) {
-                      return HistoryTransactionScreen();
+                      return const HistoryTransactionScreen();
                     },
                   );
               }
