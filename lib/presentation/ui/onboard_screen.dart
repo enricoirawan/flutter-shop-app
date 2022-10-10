@@ -61,7 +61,7 @@ class OnBoardScreen extends StatelessWidget {
               ),
               const Spacer(),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 16.w),
+                margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
