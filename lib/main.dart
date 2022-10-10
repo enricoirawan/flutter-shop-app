@@ -20,6 +20,7 @@ import 'package:flutter_shop_app/presentation/bloc/transaction_bloc/transaction_
 import 'package:flutter_shop_app/presentation/ui/checkout_screen.dart';
 import 'package:flutter_shop_app/presentation/ui/detail_product_screen.dart';
 import 'package:flutter_shop_app/presentation/ui/get_user_position.dart';
+import 'package:flutter_shop_app/presentation/ui/history_transaction_screen.dart';
 import 'package:flutter_shop_app/presentation/ui/main_screen.dart';
 import 'package:flutter_shop_app/presentation/ui/onboard_screen.dart';
 import 'package:flutter_shop_app/presentation/ui/payment_success_screen.dart';
@@ -183,6 +184,12 @@ class MyApp extends StatelessWidget {
                   return MaterialPageRoute(
                     builder: (_) {
                       return const PaymentSuccess();
+                    },
+                  );
+                case AppRoutes.historyTransactions:
+                  return MaterialPageRoute(
+                    builder: (_) {
+                      return HistoryTransactionScreen();
                     },
                   );
               }

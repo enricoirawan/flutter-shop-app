@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_shop_app/common/navigation/router/cart_route.dart';
 import 'package:flutter_shop_app/common/navigation/router/checkout_route.dart';
 import 'package:flutter_shop_app/common/navigation/router/home_route.dart';
+import 'package:flutter_shop_app/common/navigation/router/profile_route.dart';
 import 'package:flutter_shop_app/data/datasource/local/address_local_datasources.dart';
 import 'package:flutter_shop_app/data/datasource/local/cart_local_datasource.dart';
 import 'package:flutter_shop_app/data/datasource/local/transaction_local_datasources.dart';
@@ -279,6 +280,12 @@ class Injection {
 
     sl.registerLazySingleton<CheckoutRouter>(
       () => CheckoutRouterImpl(
+        navigationHelper: sl(),
+      ),
+    );
+
+    sl.registerLazySingleton<ProfileRouter>(
+      () => ProfileRouterImpl(
         navigationHelper: sl(),
       ),
     );

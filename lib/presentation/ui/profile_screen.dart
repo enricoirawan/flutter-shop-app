@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_shop_app/common/navigation/router/auth_route.dart';
+import 'package:flutter_shop_app/common/navigation/router/profile_route.dart';
 import 'package:flutter_shop_app/common/styles.dart';
 import 'package:flutter_shop_app/core/state/view_state.dart';
 import 'package:flutter_shop_app/presentation/bloc/logout_bloc/logout_cubit.dart';
@@ -17,6 +18,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthRouter authRouter = sl();
+    final ProfileRouter profileRouter = sl();
 
     return BlocListener<LogoutCubit, LogoutState>(
       listener: (context, state) {
@@ -124,6 +126,31 @@ class ProfileScreen extends StatelessWidget {
                     },
                   ),
                 ],
+              ),
+              const Divider(),
+              InkWell(
+                onTap: () {
+                  profileRouter.navigateToHistoryTransaction();
+                },
+                child: Container(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.history,
+                        size: 30,
+                      ),
+                      SizedBox(
+                        width: 16.w,
+                      ),
+                      Text(
+                        "History Transactions",
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                    ],
+                  ),
+                ),
               ),
               const Divider(),
               InkWell(
