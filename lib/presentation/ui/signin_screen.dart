@@ -235,7 +235,8 @@ class _SignInScreenState extends State<SignInScreen> {
                   height: 10.h,
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 16.w),
+                  margin:
+                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
