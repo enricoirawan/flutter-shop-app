@@ -1,6 +1,10 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_shop_app/common/navigation/argument/detail_product_argument.dart';
+import 'package:flutter_shop_app/common/navigation/router/home_route.dart';
+import 'package:flutter_shop_app/common/notification_helper.dart';
 import 'package:flutter_shop_app/common/styles.dart';
 import 'package:flutter_shop_app/core/state/view_state.dart';
 import 'package:flutter_shop_app/domain/entity/response/product_entity.dart';
@@ -15,6 +19,9 @@ import 'package:flutter_shop_app/presentation/widget/product_shimmer.dart';
 import 'package:flutter_shop_app/presentation/widget/search.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../common/get_it.dart';
+import '../../common/navigation/router/profile_route.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -23,12 +30,64 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final HomeRouter _homeRouter = sl();
+
   int categoryActiveIndex = 0;
 
   @override
   void initState() {
     super.initState();
+    _setupInteractMessage();
+    _setupNotificationListener();
     context.read<AddressCubit>().getUserAddress();
+  }
+
+  void _setupInteractMessage() async {
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
+
+    // If the message also contains a data property with a "type" of "chat",
+    // navigate to a chat screen
+    if (initialMessage != null) {
+      _handleMessage(initialMessage);
+    }
+
+    // Also handle any interaction when the app is in the background via a
+    // Stream listener
+    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+  }
+
+  void _handleMessage(RemoteMessage message) {
+    if (message.data["type"] == "product") {
+      String productId = message.data["productId"];
+      _homeRouter.navigateToDetailProduct(
+        DetailProductArgument(
+          productId: int.parse(productId),
+        ),
+      );
+    }
+  }
+
+  void _setupNotificationListener() {
+    final NotificationHelper notificationHelper = NotificationHelper();
+    notificationHelper.setupFlutterNotifications();
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      if (message.notification != null) {
+        if (message.data["type"] == "product") {
+          notificationHelper.showProductNotification(
+            message.notification!.title,
+            message.notification!.body,
+            message.data["productId"],
+          );
+        } else {
+          notificationHelper.showSuccessCheckoutNotification(
+            message.notification!.title,
+            message.notification!.body,
+          );
+        }
+      }
+    });
   }
 
   void selectCategory(int index, String selectedCategory) {

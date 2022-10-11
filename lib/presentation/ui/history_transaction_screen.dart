@@ -7,13 +7,24 @@ import 'package:flutter_shop_app/presentation/bloc/transaction_bloc/transaction_
 
 import '../../common/get_it.dart';
 
-class HistoryTransactionScreen extends StatelessWidget {
+class HistoryTransactionScreen extends StatefulWidget {
   const HistoryTransactionScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final ProfileRouter profileRouter = sl();
+  State<HistoryTransactionScreen> createState() =>
+      _HistoryTransactionScreenState();
+}
 
+class _HistoryTransactionScreenState extends State<HistoryTransactionScreen> {
+  final ProfileRouter _profileRouter = sl();
+  @override
+  void initState() {
+    super.initState();
+    context.read<TransactionCubit>().getAllTransactions();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         bottom: false,
@@ -28,7 +39,7 @@ class HistoryTransactionScreen extends StatelessWidget {
                 children: [
                   IconButton(
                     onPressed: () {
-                      profileRouter.goBack();
+                      _profileRouter.goBack();
                     },
                     icon: const Icon(Icons.arrow_back_ios),
                   ),
@@ -51,6 +62,7 @@ class HistoryTransactionScreen extends StatelessWidget {
                   return const CircularProgressIndicator();
                 } else if (status.isHasData) {
                   final transactions = state.transactionState.data ?? [];
+
                   return Expanded(
                     child: ListView.builder(
                       itemBuilder: (context, index) {

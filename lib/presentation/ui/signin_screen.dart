@@ -49,6 +49,7 @@ class _SignInScreenState extends State<SignInScreen> {
         final status = state.signIn.status;
 
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           body: SafeArea(
             child: Column(
               children: [
@@ -235,8 +236,10 @@ class _SignInScreenState extends State<SignInScreen> {
                   height: 10.h,
                 ),
                 Container(
-                  margin:
-                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 10.h,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

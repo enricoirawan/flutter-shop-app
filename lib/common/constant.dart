@@ -5,6 +5,7 @@ class AppConstants {
   static AppApi appApi = const AppApi();
   static ErrorMessage errorMessage = const ErrorMessage();
   static SuccessMessage successMessage = const SuccessMessage();
+  static FCMServerKey fcmServerKey = const FCMServerKey();
 }
 
 class CachedKey {
@@ -29,6 +30,8 @@ class AppApi {
   String get products => 'products/';
 
   String get profile => 'users/';
+
+  String get pushNotif => 'https://fcm.googleapis.com/fcm/send';
 }
 
 class ErrorMessage {
@@ -79,4 +82,11 @@ class SuccessMessage {
   String get saveAddressSuccess => "Address have set successfully";
 
   String get successDeletedProduct => "Product has been deleted";
+}
+
+class FCMServerKey {
+  const FCMServerKey();
+
+  String get fcmServerKey =>
+      "AAAA1AZYEk0:APA91bH-hvwJW7WKMMDSo3hQdUsRKnrSrb1-P0E0CBi9VEt2_tI5u3tuU22qlfmQvEO0uTiIlXIflG8Xh9BS1T0O92H_jlls0X1ABRc96igJ2xeJjXbrvXCuPHwdxzPJXgtI3YoegQ1d";
 }

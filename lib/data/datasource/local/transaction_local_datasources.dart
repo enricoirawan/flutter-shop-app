@@ -33,7 +33,7 @@ class TransactionLocalDataSourcesImpl implements TransactionLocalDataSources {
       final result =
           await appDatabase.transactionDao.insertTransaction(transaction);
       return result > 0 ? true : false;
-    } on DatabaseException catch (error) {
+    } on DatabaseException catch (_) {
       throw DatabaseFailure(AppConstants.errorMessage.failedInsertTransaction);
     }
   }

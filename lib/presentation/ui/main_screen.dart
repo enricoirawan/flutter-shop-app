@@ -8,21 +8,16 @@ import 'package:flutter_shop_app/presentation/ui/profile_screen.dart';
 
 import '../bloc/bottom_nav_bloc/bottom_nav_cubit.dart';
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  final List<IconData> iconList = [
-    Icons.home,
-    Icons.account_circle,
-  ];
-
-  @override
   Widget build(BuildContext context) {
+    final List<IconData> iconList = [
+      Icons.home,
+      Icons.account_circle,
+    ];
+
     return Scaffold(
       body: BlocBuilder<BottomNavCubit, int>(builder: (context, state) {
         if (state == 0) {
