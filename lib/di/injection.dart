@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_shop_app/common/dynamic_link_helper.dart';
 import 'package:flutter_shop_app/common/navigation/router/cart_route.dart';
 import 'package:flutter_shop_app/common/navigation/router/checkout_route.dart';
 import 'package:flutter_shop_app/common/navigation/router/home_route.dart';
@@ -288,6 +289,10 @@ class Injection {
       () => ProfileRouterImpl(
         navigationHelper: sl(),
       ),
+    );
+
+    sl.registerLazySingleton<DynamicLinkHelper>(
+      () => DynamicLinkHelper(),
     );
   }
 }

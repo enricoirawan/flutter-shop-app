@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_shop_app/common/dynamic_link_helper.dart';
 import 'package:flutter_shop_app/common/navigation/argument/detail_product_argument.dart';
 import 'package:flutter_shop_app/common/navigation/router/home_route.dart';
 import 'package:flutter_shop_app/common/notification_helper.dart';
@@ -20,7 +21,6 @@ import 'package:flutter_shop_app/presentation/widget/search.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../common/get_it.dart';
-import '../../common/navigation/router/profile_route.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -31,6 +31,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final HomeRouter _homeRouter = sl();
+  final DynamicLinkHelper _dynamicLinkHelper = sl();
 
   int categoryActiveIndex = 0;
 
@@ -39,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _setupInteractMessage();
     _setupNotificationListener();
+    _dynamicLinkHelper.handleDynamicLinks();
     context.read<AddressCubit>().getUserAddress();
   }
 
