@@ -192,9 +192,8 @@ class _CartScreenState extends State<CartScreen> {
                     final status = state.cartState.status;
                     final carts = state.cartState.data ?? [];
 
-                    final total =
-                        carts.fold<double>(0, (sum, item) => sum + item.price) +
-                            10;
+                    final total = carts.fold<double>(0,
+                        (sum, item) => (sum + (item.price * item.amount)) + 10);
 
                     if (status.isHasData) {
                       return Container(
@@ -237,9 +236,8 @@ class _CartScreenState extends State<CartScreen> {
                     final status = state.cartState.status;
                     final carts = state.cartState.data ?? [];
 
-                    final total =
-                        carts.fold<double>(0, (sum, item) => sum + item.price) +
-                            10;
+                    final total = carts.fold<double>(0,
+                        (sum, item) => (sum + (item.price * item.amount)) + 10);
 
                     if (status.isHasData) {
                       return Container(
