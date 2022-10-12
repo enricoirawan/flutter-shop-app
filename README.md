@@ -1,16 +1,45 @@
-# flutter_shop_app
 
-A new Flutter project.
+# Flutter Shop App (By Enrico Irawan)
+An e-commerce app that build with Flutter 3.0. This app using Fake Store API (https://fakestoreapi.com/).
+This project build by using Clean Architecture (unlce bob) and BLoC state management.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Features
+- Sign in
+- Geolocation and geocoding
+- Get products
+- Get product detail
+- Add to cart
+- Get user profile
+- Get history transactions
+- Sign out
+- Push notification in app or background running (Android only)
+- Deep linking with Firebase Dynamic Link (Android only)
+## Installation
 
-A few resources to get you started if this is your first Flutter project:
+Install Flutter Shop App
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```bash
+  flutter pub get
+  flutter run android / ios
+```
+    
+## IOS Screenshots
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![On board IOS](https://i.postimg.cc/1R6jTscL/Simulator-Screen-Shot-i-Phone-14-Pro-2022-10-12-at-16-47-54.png)
+![Login IOS](https://i.postimg.cc/s2Qch4Tt/Simulator-Screen-Shot-i-Phone-14-Pro-2022-10-12-at-16-48-02.png)
+![Get user location IOS](https://i.postimg.cc/sfcp1LVM/Simulator-Screen-Shot-i-Phone-14-Pro-2022-10-12-at-16-48-15.png)
+![Home IOS](https://i.postimg.cc/44LmDRfQ/Simulator-Screen-Shot-i-Phone-14-Pro-2022-10-12-at-16-48-18.png)
+![Cart IOS](https://i.postimg.cc/DfMwCQ6C/Simulator-Screen-Shot-i-Phone-14-Pro-2022-10-12-at-16-48-32.png)
+![Profile IOS](https://i.postimg.cc/WzBjsnfT/Simulator-Screen-Shot-i-Phone-14-Pro-2022-10-12-at-16-48-36.png)
+
+## IOS Screenshots
+
+![On board Android](https://i.postimg.cc/yYKspf9y/Screenshot-1665568199.png)
+![Login Android](https://i.postimg.cc/kgprCwVZ/Screenshot-1665568214.png)
+![Get user location Android](https://i.postimg.cc/k4Nh2y47/Screenshot-1665568234.png)
+![Home Android](https://i.postimg.cc/DZhx3bcH/Screenshot-1665568246.png)
+![Cart Android](https://i.postimg.cc/HsnBmmQY/Screenshot-1665568261.png)
+![Profile Android](https://i.postimg.cc/rmgN6ZsR/Screenshot-1665568265.png)
+
+
