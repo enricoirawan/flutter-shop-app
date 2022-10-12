@@ -105,7 +105,7 @@ class _CartScreenState extends State<CartScreen> {
 
                     if (status.isHasData) {
                       final subTotal = carts.fold<double>(
-                          0, (sum, item) => sum + item.price);
+                          0, (sum, item) => sum + (item.price * item.amount));
 
                       return Container(
                         margin: EdgeInsets.symmetric(horizontal: 16.w),
