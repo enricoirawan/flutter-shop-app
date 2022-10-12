@@ -33,7 +33,7 @@ Install Flutter Shop App
 ![Cart IOS](https://i.postimg.cc/DfMwCQ6C/Simulator-Screen-Shot-i-Phone-14-Pro-2022-10-12-at-16-48-32.png)
 ![Profile IOS](https://i.postimg.cc/WzBjsnfT/Simulator-Screen-Shot-i-Phone-14-Pro-2022-10-12-at-16-48-36.png)
 
-## IOS Screenshots
+## Android Screenshots
 
 ![On board Android](https://i.postimg.cc/yYKspf9y/Screenshot-1665568199.png)
 ![Login Android](https://i.postimg.cc/kgprCwVZ/Screenshot-1665568214.png)
